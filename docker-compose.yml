@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: devinsight
+      POSTGRES_USER: devinsight
+      POSTGRES_PASSWORD: devinsight
+    ports:
+      - "5432:5432"
+    volumes:
+      - devinsight-data:/var/lib/postgresql/data
+  api:
+    build: ./backend
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres:5432/devinsight
+      DATABASE_USERNAME: devinsight
+      DATABASE_PASSWORD: devinsight
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+volumes:
+  devinsight-data:

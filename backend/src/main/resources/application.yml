@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: devinsight-api
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/devinsight}
+    username: ${DATABASE_USERNAME:devinsight}
+    password: ${DATABASE_PASSWORD:devinsight}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+server:
+  port: ${PORT:8080}
+
+devinsight:
+  gemini:
+    api-key: ${GEMINI_API_KEY:}
